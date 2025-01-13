@@ -1,0 +1,3 @@
+/home/reza/Documents/Calculater_c++/cmake-build-debug/CMakeFiles/Calculater_c__.dir
+/home/reza/Documents/Calculater_c++/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/reza/Documents/Calculater_c++/cmake-build-debug/CMakeFiles/rebuild_cache.dir

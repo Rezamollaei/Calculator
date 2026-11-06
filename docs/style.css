@@ -1,0 +1,246 @@
+:root {
+  --bg: #f3f4f8;
+  --surface: #ffffff;
+  --text: #1c1f2a;
+  --muted: #6b7083;
+  --key: #f0f1f6;
+  --key-hover: #e4e6ee;
+  --fn: #dfe2ec;
+  --accent: #4f6bed;
+  --accent-hover: #3f59d6;
+  --accent-text: #ffffff;
+  --error: #d64545;
+  --shadow: 0 10px 30px rgba(20, 24, 40, 0.08);
+  --radius: 18px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12141b;
+    --surface: #1c1f29;
+    --text: #eef0f6;
+    --muted: #9095a8;
+    --key: #272b38;
+    --key-hover: #313646;
+    --fn: #353a4b;
+    --accent: #6d86ff;
+    --accent-hover: #8297ff;
+    --error: #ff7a7a;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #12141b;
+  --surface: #1c1f29;
+  --text: #eef0f6;
+  --muted: #9095a8;
+  --key: #272b38;
+  --key-hover: #313646;
+  --fn: #353a4b;
+  --accent: #6d86ff;
+  --accent-hover: #8297ff;
+  --error: #ff7a7a;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.app {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1 { font-size: 1.4rem; margin: 0; }
+h2 { font-size: 1rem; margin: 0; }
+
+.icon-btn, .text-btn {
+  border: none;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  border-radius: 999px;
+}
+.header-actions { display: flex; gap: 8px; align-items: center; }
+.pill-btn {
+  border: none;
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  background: var(--surface);
+  color: var(--muted);
+  box-shadow: var(--shadow);
+}
+.pill-btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+.icon-btn { width: 40px; height: 40px; font-size: 1.2rem; box-shadow: var(--shadow); }
+.text-btn { background: transparent; color: var(--accent); padding: 4px 8px; }
+.text-btn:hover { text-decoration: underline; }
+
+.calculator {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+.display {
+  position: relative;
+  text-align: right;
+  padding: 22px 4px 16px;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.angle-mode {
+  position: absolute;
+  top: 0;
+  left: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  background: var(--key);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+/* While typing: expression is big, live preview is small. */
+.expression {
+  font-size: 2.3rem;
+  font-weight: 500;
+  line-height: 1.2;
+  word-break: break-all;
+}
+.expression.long { font-size: 1.6rem; }
+.result {
+  color: var(--muted);
+  font-size: 1.2rem;
+  min-height: 1.5em;
+  word-break: break-all;
+}
+/* After "=": expression shrinks, answer becomes the hero. */
+.display.done .expression { font-size: 1rem; color: var(--muted); font-weight: 400; }
+.display.done .result { color: var(--text); font-size: 2.6rem; font-weight: 600; line-height: 1.15; }
+.display.done .result.long { font-size: 1.8rem; }
+.display.has-error .result { color: var(--error); font-size: 1rem; }
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.key {
+  aspect-ratio: 1 / 1;
+  border: none;
+  border-radius: 14px;
+  background: var(--key);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.35rem;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.06s;
+  -webkit-tap-highlight-color: transparent;
+}
+.key:hover { background: var(--key-hover); }
+.key:active, .key.pressed { transform: scale(0.95); }
+.key.fn { background: var(--fn); }
+.key[data-action="decimal"] { font-weight: 700; }
+
+.sci-keys {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--key);
+}
+.sci-keys[hidden] { display: none; }
+.key.sci {
+  aspect-ratio: auto;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: transparent;
+  color: var(--text);
+}
+.key.sci:hover { background: var(--key); }
+.key.sci[data-action="angle"] { color: var(--accent); font-weight: 600; background: var(--key); }
+.key.op { color: var(--accent); font-size: 1.6rem; font-weight: 600; }
+.key.op.active { background: var(--accent); color: var(--accent-text); }
+.key.equals { background: var(--accent); color: var(--accent-text); font-size: 1.6rem; }
+.key.equals:hover { background: var(--accent-hover); }
+
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.history {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+}
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.history-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.history-list button {
+  width: 100%;
+  text-align: right;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  padding: 8px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.history-list button:hover { background: var(--key); }
+.history-list .h-expr { display: block; color: var(--muted); font-size: 0.85rem; }
+.history-list .h-res { font-weight: 600; font-size: 1.1rem; }
+.history-empty { color: var(--muted); font-size: 0.9rem; margin: 4px 0; }
+
+.hint { color: var(--muted); font-size: 0.85rem; text-align: center; margin: 0; line-height: 1.8; }
+kbd {
+  background: var(--surface);
+  border-radius: 5px;
+  padding: 1px 6px;
+  font-size: 0.8rem;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}

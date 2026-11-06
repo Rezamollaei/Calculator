@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A simple, friendly scientific calculator that runs in your browser.">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>Calculator</h1>
+      <div class="header-actions">
+        <button id="sci-toggle" class="pill-btn" type="button" aria-pressed="true" title="Show or hide scientific functions">Scientific</button>
+        <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch to dark theme" title="Toggle theme">◐</button>
+      </div>
+    </header>
+
+    <section class="calculator" aria-label="Calculator">
+      <div class="display" role="status" aria-live="polite">
+        <span id="angle-mode" class="angle-mode">DEG</span>
+        <div id="expression" class="expression">0</div>
+        <div id="result" class="result"></div>
+      </div>
+
+      <div class="sci-keys" aria-label="Scientific functions">
+        <button class="key sci" data-action="angle" title="Switch between degrees and radians">Deg</button>
+        <button class="key sci" data-insert="(" aria-label="Open parenthesis">(</button>
+        <button class="key sci" data-action="close" aria-label="Close parenthesis">)</button>
+        <button class="key sci" data-post="!" aria-label="Factorial" title="Factorial">x!</button>
+        <button class="key sci" data-insert="π" aria-label="Pi">π</button>
+
+        <button class="key sci" data-insert="sin(" title="Sine">sin</button>
+        <button class="key sci" data-insert="cos(" title="Cosine">cos</button>
+        <button class="key sci" data-insert="tan(" title="Tangent">tan</button>
+        <button class="key sci" data-insert="ln(" title="Natural logarithm">ln</button>
+        <button class="key sci" data-insert="log(" title="Logarithm base 10">log</button>
+
+        <button class="key sci" data-insert="sin⁻¹(" aria-label="Inverse sine" title="Inverse sine">sin⁻¹</button>
+        <button class="key sci" data-insert="cos⁻¹(" aria-label="Inverse cosine" title="Inverse cosine">cos⁻¹</button>
+        <button class="key sci" data-insert="tan⁻¹(" aria-label="Inverse tangent" title="Inverse tangent">tan⁻¹</button>
+        <button class="key sci" data-insert="e^(" aria-label="e to the power of" title="e to the power of x">eˣ</button>
+        <button class="key sci" data-insert="e" aria-label="Euler's number" title="Euler's number">e</button>
+
+        <button class="key sci" data-post="²" aria-label="Square" title="Square">x²</button>
+        <button class="key sci" data-op="^" aria-label="Power" title="x to the power of y">xʸ</button>
+        <button class="key sci" data-insert="√(" aria-label="Square root" title="Square root">√</button>
+        <button class="key sci" data-insert="∛(" aria-label="Cube root" title="Cube root">∛</button>
+        <button class="key sci" data-post="⁻¹" aria-label="Reciprocal" title="1 divided by x">1/x</button>
+      </div>
+
+      <div class="keys">
+        <button class="key fn" data-action="clear" aria-label="Clear all">AC</button>
+        <button class="key fn" data-action="backspace" aria-label="Delete last">⌫</button>
+        <button class="key fn" data-post="%" aria-label="Percent">%</button>
+        <button class="key op" data-op="÷" aria-label="Divide">÷</button>
+
+        <button class="key" data-digit="7">7</button>
+        <button class="key" data-digit="8">8</button>
+        <button class="key" data-digit="9">9</button>
+        <button class="key op" data-op="×" aria-label="Multiply">×</button>
+
+        <button class="key" data-digit="4">4</button>
+        <button class="key" data-digit="5">5</button>
+        <button class="key" data-digit="6">6</button>
+        <button class="key op" data-op="−" aria-label="Subtract">−</button>
+
+        <button class="key" data-digit="1">1</button>
+        <button class="key" data-digit="2">2</button>
+        <button class="key" data-digit="3">3</button>
+        <button class="key op" data-op="+" aria-label="Add">+</button>
+
+        <button class="key fn" data-action="negate" aria-label="Change sign">±</button>
+        <button class="key" data-digit="0">0</button>
+        <button class="key" data-action="decimal" aria-label="Decimal point">.</button>
+        <button class="key equals" data-action="equals" aria-label="Equals">=</button>
+      </div>
+    </section>
+
+    <section class="history" aria-labelledby="history-title">
+      <div class="history-header">
+        <h2 id="history-title">History</h2>
+        <button id="clear-history" class="text-btn" type="button">Clear</button>
+      </div>
+      <ol id="history-list" class="history-list"></ol>
+      <p id="history-empty" class="history-empty">Your calculations will appear here. Tap one to reuse its result.</p>
+    </section>
+
+    <p class="hint">
+      Keyboard: numbers, <kbd>+</kbd> <kbd>-</kbd> <kbd>*</kbd> <kbd>/</kbd> <kbd>^</kbd> <kbd>(</kbd> <kbd>)</kbd> <kbd>!</kbd>,
+      <kbd>Enter</kbd>, <kbd>Backspace</kbd>, <kbd>Esc</kbd>.<br>
+      Shortcuts: <kbd>s</kbd> sin, <kbd>c</kbd> cos, <kbd>t</kbd> tan, <kbd>l</kbd> ln, <kbd>r</kbd> √, <kbd>p</kbd> π.
+    </p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

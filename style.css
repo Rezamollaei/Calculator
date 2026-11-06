@@ -174,7 +174,7 @@ h2 { font-size: 1rem; margin: 0; }
 
 .sci-keys {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   margin-bottom: 12px;
   padding-bottom: 12px;
@@ -243,4 +243,61 @@ kbd {
   padding: 1px 6px;
   font-size: 0.8rem;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* ---------- Wide screens: horizontal layout ---------- */
+@media (min-width: 760px) {
+  .app {
+    max-width: 1080px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    grid-template-areas:
+      "header  header"
+      "calc    history"
+      "hint    hint";
+    gap: 20px;
+    align-items: stretch;
+  }
+  .app-header { grid-area: header; }
+  .hint { grid-area: hint; }
+
+  .calculator {
+    grid-area: calc;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "display display"
+      "sci     keys";
+    column-gap: 24px;
+    padding: 24px;
+  }
+  .calculator:has(.sci-keys[hidden]) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "display" "keys";
+  }
+  /* Basic mode: shrink the whole layout so there's no empty gap. */
+  .app:has(.sci-keys[hidden]) { max-width: 780px; }
+  .display { grid-area: display; min-height: 140px; }
+  .expression { font-size: 2.8rem; }
+  .expression.long { font-size: 2rem; }
+  .display.done .result { font-size: 3.2rem; }
+
+  .sci-keys {
+    grid-area: sci;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
+    margin: 0;
+    padding: 0 24px 0 0;
+    border-bottom: none;
+    border-right: 1px solid var(--key);
+  }
+  .keys { grid-area: keys; grid-template-rows: repeat(5, 1fr); }
+  .key { aspect-ratio: auto; height: 64px; }
+  .key.sci { height: 64px; font-size: 1.05rem; background: var(--key); }
+  .key.sci:hover { background: var(--key-hover); }
+
+  /* contain: size lets the calculator set the row height; history scrolls inside it. */
+  .history { grid-area: history; display: flex; flex-direction: column; contain: size; }
+  .history-list { max-height: none; flex: 1; min-height: 0; }
+  .history-list:empty { flex: 0; }
 }

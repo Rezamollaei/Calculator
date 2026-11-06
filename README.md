@@ -2,8 +2,10 @@
 
 ## 🌐 Web version
 
-A user-friendly browser version of this calculator lives in [`docs/`](docs/).
-Open `docs/index.html` in any browser — no install or build needed.
+**Live site:** https://rezamollaei.github.io/Calculator/
+
+The website is at the root of this repo (`index.html`, `style.css`, `script.js`).
+You can also open `index.html` in any browser — no install or build needed.
 
 Features:
 - Big, touch-friendly buttons that work on phones and desktops
@@ -23,9 +25,15 @@ Features:
   - Live preview of the answer as you type
 - Light and dark theme
 
-To publish it with GitHub Pages: **Settings → Pages → Deploy from a branch → `main` / `/docs`**.
+To publish it with GitHub Pages: **Settings → Pages → Source: Deploy from a branch → Branch: `main`, folder: `/ (root)` → Save**.
 
 ## 💻 C++ console version
+
+The original console program is in [`cpp/`](cpp/). To build and run it:
+
+```bash
+cd cpp && cmake -B build && cmake --build build && ./build/Calculater_c__
+```
 
 
 This is a basic calculator program in C++ that performs arithmetic operations (+, -, *, /) based on the user's input. Here's a breakdown of the code:

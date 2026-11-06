@@ -1,3 +1,23 @@
+# Calculator
+
+## 🌐 Web version
+
+A user-friendly browser version of this calculator lives in [`docs/`](docs/).
+Open `docs/index.html` in any browser — no install or build needed.
+
+Features:
+- Big, touch-friendly buttons that work on phones and desktops
+- Keyboard support: digits, `+ - * /`, `Enter` / `=`, `Backspace`, `Esc`, `%`
+- Shows the expression you're building and highlights the selected operator
+- Friendly error messages (e.g. "Can't divide by zero") instead of `inf`
+- Calculation history (saved in your browser) — tap an entry to reuse its result
+- `±`, `%`, decimal input, and clean results (`0.1 + 0.2 = 0.3`)
+- Light and dark theme
+
+To publish it with GitHub Pages: **Settings → Pages → Deploy from a branch → `main` / `/docs`**.
+
+## 💻 C++ console version
+
 
 This is a basic calculator program in C++ that performs arithmetic operations (+, -, *, /) based on the user's input. Here's a breakdown of the code:
 

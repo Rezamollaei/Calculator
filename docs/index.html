@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A simple, friendly calculator that runs in your browser.">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>Calculator</h1>
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch to dark theme" title="Toggle theme">◐</button>
+    </header>
+
+    <section class="calculator" aria-label="Calculator">
+      <div class="display" role="status" aria-live="polite">
+        <div id="expression" class="expression"></div>
+        <div id="result" class="result">0</div>
+      </div>
+
+      <div class="keys">
+        <button class="key fn" data-action="clear" aria-label="Clear all">AC</button>
+        <button class="key fn" data-action="backspace" aria-label="Delete last digit">⌫</button>
+        <button class="key fn" data-action="percent" aria-label="Percent">%</button>
+        <button class="key op" data-op="/" aria-label="Divide">÷</button>
+
+        <button class="key" data-digit="7">7</button>
+        <button class="key" data-digit="8">8</button>
+        <button class="key" data-digit="9">9</button>
+        <button class="key op" data-op="*" aria-label="Multiply">×</button>
+
+        <button class="key" data-digit="4">4</button>
+        <button class="key" data-digit="5">5</button>
+        <button class="key" data-digit="6">6</button>
+        <button class="key op" data-op="-" aria-label="Subtract">−</button>
+
+        <button class="key" data-digit="1">1</button>
+        <button class="key" data-digit="2">2</button>
+        <button class="key" data-digit="3">3</button>
+        <button class="key op" data-op="+" aria-label="Add">+</button>
+
+        <button class="key fn" data-action="negate" aria-label="Change sign">±</button>
+        <button class="key" data-digit="0">0</button>
+        <button class="key" data-action="decimal" aria-label="Decimal point">.</button>
+        <button class="key equals" data-action="equals" aria-label="Equals">=</button>
+      </div>
+    </section>
+
+    <section class="history" aria-labelledby="history-title">
+      <div class="history-header">
+        <h2 id="history-title">History</h2>
+        <button id="clear-history" class="text-btn" type="button">Clear</button>
+      </div>
+      <ol id="history-list" class="history-list"></ol>
+      <p id="history-empty" class="history-empty">Your calculations will appear here. Tap one to reuse its result.</p>
+    </section>
+
+    <p class="hint">Tip: you can use your keyboard — numbers, <kbd>+</kbd> <kbd>−</kbd> <kbd>*</kbd> <kbd>/</kbd>, <kbd>Enter</kbd>, <kbd>Backspace</kbd>, <kbd>Esc</kbd>.</p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
